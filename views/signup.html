@@ -31,16 +31,16 @@
 <div id="eventicaforms" class="inputErrors" >
 
 			<ul id="progressbar">
-				<li id="basicinfo_progress" class="active">Basic Info</li>
-				<li id="profile_progress"  class="">Profile</li>
-				<li id="experience_progress" class="">Experience</li>
-				<li id="basicinfo_progress" class="">Availability</li>
-				<li id="basicinfo_progress" class="">Legal</li>
+				<li id="#basicinfo_form" class="active">Basic Info</li>
+				<li id="#profile_form"  class="">Profile</li>
+				<li id="#experience_form" class="">Experience</li>
+				<li id="#basicinfo_form" class="">Availability</li>
+				<li id="#basicinfo_form" class="">Legal</li>
 			</ul>
 
 			<!-- fieldsets -->
 
-			<fieldset id="basicinfo_form" ng-if="user.forms.basic == undefined">
+			<fieldset id="basicinfo_form">
 				<md-content layout-padding class="inputErrors">
 			<form name="binfo" id="basicuser" ng-submit="submit()" novalidate ng-cloak>
 
@@ -196,6 +196,68 @@
 								</div>
 								<div class="col s12 l4"></div>
 				</div>
+				<!--
+				<div class="row ">
+							  <div class="col s12 l2">
+							     <label class="inline">Email: </label>
+    						  </div>
+    						  <div class="col s12 l6">
+
+    						  	<div class="input-field">
+									<label class="active" for="email">mail@domain.com</label>
+								   <input ng-minlength="5" required="" type="email" name="email" id="email" ng-model="basicinfo.email" ng-pattern="/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@(yahoo|hotmail|gmail)\.com*$/">
+							        <div class="eventicaerror" ng-messages="binfo.email.$error">
+								          <div ng-message="required">
+							            Email is required.
+							          </div>
+							          <div ng-message="pattern">
+							            Your email dont look like an e-mail address.
+							          </div>
+							        </div>
+							    </div>
+
+    						  </div><div class="col s12 l4"></div>
+				</div>
+				<div class="row">
+								<div class="col s12 l2">
+									<label class="inline"><font size="-1">Password:</font></label>
+								</div>
+								<div class="col s12 l6">
+									<div class="password-field">
+
+										<div class="input-field">
+											<label class="active" for="password">Password</label>
+										   <input required="" type="password" name="password" id="password" ng-model="basicinfo.password"  >
+									        <div class="eventicaerror" ng-messages="binfo.password.$error">
+										          <div ng-message="required">
+									            Passwords is required.
+									          </div>
+									        </div>
+									    </div>
+
+									  </div>
+								</div>
+								<div class="col s12 l4"></div>
+				</div>
+				<div class="row">
+								<div class="col s12 l6 offset-l2">
+									  <div class="password-field">
+									  <div class="input-field">
+											<label class="active" for="cpassword">Confirm password</label>
+										   <input required="" type="password" name="cpassword" id="cpassword"  ng-pattern="{{ basicinfo.password }}" ng-model="basicinfo.cpassword" >
+									        <div class="eventicaerror" ng-messages="binfo.cpassword.$error">
+										          <div ng-message="pattern">
+									            Passwords dont match.
+									          </div>
+									          <div ng-message="required">
+									            Confirm password is required.
+									          </div>
+									        </div>
+									    </div>
+									  </div>
+								</div>
+								<div class="col s12 l4"></div>
+				</div>-->
 				<div class="row">
 								<div class="col s12 l2">
 									<label class="inline"><font size="-1">Referred By:</font></label>
