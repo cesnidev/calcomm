@@ -1,49 +1,49 @@
-eventica.factory('EventicaResource', function($resource) {
-		return $resource("http://localhost:3000/api/v1/", {
-			id: "@id"
-		}, {
-			update: {
-				method: "PUT"
-			},
+eventica.factory('EventicaResource', function($resource,EventicaConfig) {
+    return $resource("http://"+EventicaConfig.IP+":3000/api/v1/", {
+      id: "@id"
+    }, {
+      update: {
+        method: "PUT"
+      },
       saveBasicInfo:{
         method:'POST',
-        url:'http://localhost:3000/api/v1/basics'
+        url:'http://'+EventicaConfig.IP+':3000/api/v1/basics'
       },
       saveProfile:{
         method:'POST',
-        url:'http://localhost:3000/api/v1/profiles'
+        url:'http://'+EventicaConfig.IP+':3000/api/v1/profiles'
       },
       saveExperience:{
         method:'POST',
-        url:'http://localhost:3000/api/v1/experiences'
+        url:'http://'+EventicaConfig.IP+':3000/api/v1/experiences'
       },
       saveAvailability:{
         method:'POST',
-        url:'http://localhost:3000/api/v1/availabilities'
+        url:'http://'+EventicaConfig.IP+':3000/api/v1/availabilities'
       },
       saveLegal:{
         method:'POST',
-        url:'http://localhost:3000/api/v1/legals'
+        url:'http://'+EventicaConfig.IP+':3000/api/v1/legals'
       }
-		});
-	})
-.factory('EventicaLogin', function (Session,$http,$location,$window,$rootScope) {
+    });
+  })
+.factory('EventicaLogin', function (Session,$http,$location,$window,$rootScope,EventicaConfig,Stats) {
   var eventicalogin = {};
   var data;
   var errors;
 
-	eventicalogin.register = function (dataregister,social) {
-    	var cookie = {};
-      var url = 'http://localhost:3000/api/v1/normal/register/';
+  eventicalogin.register = function (dataregister,social) {
+      var cookie = {};
+      var url = 'http://'+EventicaConfig.IP+':3000/api/v1/normal/register/';
 
       if(social)
-        url = 'http://localhost:3000/api/v1/social/register/';
+        url = 'http://'+EventicaConfig.IP+':3000/api/v1/social/register/';
 
-		$http.post(url,dataregister,{"headers" : "Content-Type=application/x-www-form-urlencoded; charset=UTF-8"})
-		.then(function successCallback(response) {
+    $http.post(url,dataregister,{"headers" : "Content-Type=application/x-www-form-urlencoded; charset=UTF-8"})
+    .then(function successCallback(response) {
       data=response.data.data;
       errors = response.data.errors;
-			console.log("sucess: "+JSON.stringify(response.data));
+      console.log("sucess: "+JSON.stringify(response.data));
       console.log("sucess data: "+JSON.stringify(data));
       console.log("Token: "+response.data.data.relations.tokens[0].attributes.token);
       if(errors==''|| !errors)
@@ -93,28 +93,33 @@ eventica.factory('EventicaResource', function($resource) {
         notificar(response.errors);
         
       }
-      return reponse;
 
-		}, function errorCallback(response) {
-			notificar(response.data.errors[0]);
-      return response;
-		});
+    }, function errorCallback(response) {
+      if(response!=undefined)
+      {
+        notificar(response.data.errors[0]);
+      }
+      else
+      {
+        notificar(Stats.missed);
+      }
+    });
   };
 
   eventicalogin.login = function(credentials,social){
-    var cookie={};
-    $rootScope.forms={basicinfo:{}};
-    var url = 'http://localhost:3000/api/v1/normal/login/';
+    var cookie={forms:{}};
+    $rootScope.forms={basicinfo:{},profile:{},experience:{},availability:{},legal:{}};
+    var url = 'http://'+EventicaConfig.IP+':3000/api/v1/normal/login/';
 
       if(social)
-        url = 'http://localhost:3000/api/v1/social/login/';
+        url = 'http://'+EventicaConfig.IP+':3000/api/v1/social/login/';
 
     $http.post(url,credentials,{}).then(function successCallback(response){
       data=response.data.data;
       errors = response.data.errors;
       console.log("sucess: "+JSON.stringify(response));
-      console.log("sucess data: "+JSON.stringify(data));
-      console.log("Token: "+data.relations.tokens[0].attributes.token);
+      //console.log("sucess data: "+JSON.stringify(data));
+      //console.log("Token: "+data.relations.tokens[0].attributes.token);
       if (errors==''|| !errors) {
           cookie.id = data.id;
           cookie.user=data.attributes.name;
@@ -122,14 +127,21 @@ eventica.factory('EventicaResource', function($resource) {
           cookie.image=data.attributes.picture;
           cookie.token=data.relations.tokens[0].attributes.token;
           cookie.provider = data.attributes.provider;
-          Session.StoreSession(cookie);
-          
-          if(data.relations.basic.attributes){
-            console.log("Basic Form: "+JSON.stringify(data.relations.basic.attributes));
-            $rootScope.forms.basicinfo=data.relations.basic.attributes;
-          }
-          else
-            console.log("Basic not found");
+
+            if(data.relations.basic != undefined)
+              cookie.forms.basic=true;
+            else
+              console.log('no existe basic');
+
+            if(data.relations.profile != undefined)
+              cookie.forms.profile=true;
+            if(data.relations.experience != undefined)
+              cookie.forms.experience=true;
+            if(data.relations.availability != undefined)
+              cookie.forms.availability=true;
+            if(data.relations.legal != undefined)
+              cookie.forms.legal=true;
+            Session.StoreSession(cookie);
 
           $window.location.href = '#/signup';
       } else{
@@ -137,9 +149,14 @@ eventica.factory('EventicaResource', function($resource) {
         notificar(errors.errors);
       };
     },function errorCallback(response){
+       if(response!=undefined)
+        {
           notificar(response.data.errors[0]);
-        
-        
+        }
+        else
+        {
+          notificar(Stats.missed);
+        }
     });
   }
  
@@ -151,33 +168,4 @@ eventica.factory('EventicaResource', function($resource) {
   };
  
   return eventicalogin;
-}).factory('$Facebook', function() {
-   var facebook={};
-
-   facebook.getMyInfo = function(){
-      var myinfo={};
-      FB.api('/me',{fields:'email,picture,birthday,name'} ,function (response) {
-                  
-            //console.log("Response Data: "+JSON.stringify(response));
-
-        FB.api('/'+response.id+'/picture?width=800&height=800',function (response) {
-            console.log("Response Image: "+JSON.stringify(response.data.url));
-            myinfo.url = response.data.url;
-
-          return myinfo;
-        });
-    });
-   };
-
-   facebook.isOnline = function(){
-      FB.getLoginStatus(function(response) {
-        if (response.status == 'connected')
-          return true;
-        else
-          return false;
-      });
-   };
-
-   return facebook;
-   
 });

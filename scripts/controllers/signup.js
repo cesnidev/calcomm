@@ -2,7 +2,59 @@
 
 eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cssInjector,$window,Session,$location,EventicaConfig,EventicaLogin) {
 
+	if(!EventicaLogin.isAuthenticated())
+		$location.path("/login");
+	else
+	{
+		$scope.url = $location.absUrl();
+		$scope.user = Session.getSession();
+		console.log("Cookie Content: "+JSON.stringify($scope.user));
 
+		var allcomplete = $scope.user.forms;
+
+		console.log('contenido forms relation  : '+allcomplete);
+		if(allcomplete !=undefined)
+		{
+			if(allcomplete.basicinfo != undefined)
+			{
+				$("#profile_progress").addClass("active");
+			}
+			if(allcomplete.profile != undefined)
+			{
+				$("#profile_progress").addClass("active");
+				$("#experience_progress").addClass("active");
+			}
+			if(allcomplete.experience != undefined)
+			{
+				$("#profile_progress").addClass("active");
+				$("#experience_progress").addClass("active");
+				$("#availability_progress").addClass("active");
+			}
+			if(allcomplete.availability != undefined)
+			{
+				$("#profile_progress").addClass("active");
+				$("#experience_progress").addClass("active");
+				$("#availability_progress").addClass("active");
+				$("#legal_progress").addClass("active");
+			}
+			if(allcomplete.basic != undefined && allcomplete.profile != undefined && allcomplete.experience != undefined && allcomplete.availability != undefined && allcomplete.legal != undefined)
+				$location.path('/home');
+		}
+		
+
+		
+	}
+
+	if(EventicaLogin.isAuthenticated()){
+		$scope.jbasic = {token:$scope.user.token,app_id:EventicaConfig.AppId,basic:''};
+		$scope.jprofile = {token:$scope.user.token,app_id:EventicaConfig.AppId,profile:''};
+		$scope.jexperience = {token:$scope.user.token,app_id:EventicaConfig.AppId,experience:''};
+		$scope.javailability = {token:$scope.user.token,app_id:EventicaConfig.AppId,availability:''};
+		$scope.jlegal = {token:$scope.user.token,app_id:EventicaConfig.AppId,legal:''};
+
+		if($scope.user.provider=='facebook'||$scope.user.provider=='google')
+			$scope.img = $scope.user.image;
+	}
 	cssInjector.add("assets/css/proyecto.form.css");
 
 	/* START INITS*/
