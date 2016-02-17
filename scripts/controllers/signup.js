@@ -1,7 +1,7 @@
 'use strict';
 
 eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cssInjector,$window,Session,$location,EventicaConfig,EventicaLogin) {
-	var allcompletecookie{};
+	var allcompletecookie={};
 	if(!EventicaLogin.isAuthenticated())
 		$location.path("/login");
 	else
