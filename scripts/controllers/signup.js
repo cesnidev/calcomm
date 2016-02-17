@@ -27,14 +27,15 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 		{
 			if(allcomplete.basic != undefined)
 			{
-				$("#basicinfo_form").remove();
+				console.log('$("#progressbar li").eq(0).addClass("active");');
+				angular.element( document.querySelector("#basicinfo_form") ).remove();
 				allcompletecookie.basicinfo=true;
 				Session.save('completeforms',allcompletecookie);
 				$("#progressbar li").eq(0).addClass("active");
 			}
 			if(allcomplete.profile != undefined)
 			{
-				$("#profile_form").remove();
+				angular.element( document.querySelector("#profile_form") ).remove();
 				allcompletecookie.basicinfo=true;
 				allcompletecookie.profile=true;
 				Session.save('completeforms',allcompletecookie);
@@ -42,7 +43,7 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 			}
 			if(allcomplete.experience != undefined)
 			{
-				$("#basicinfo_form").remove();
+				angular.element( document.querySelector("#experience_form") ).remove();
 				allcompletecookie.basicinfo=true;
 				allcompletecookie.profile=true;
 				allcompletecookie.experience=true;
@@ -51,7 +52,7 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 			}
 			if(allcomplete.availability != undefined)
 			{
-				$("#availability_form").remove();
+				angular.element( document.querySelector("#availability_form") ).remove();
 				allcompletecookie.basicinfo=true;
 				allcompletecookie.experience=true;
 				allcompletecookie.availability=true;
@@ -61,7 +62,7 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 			}
 			if(allcomplete.basic != undefined && allcomplete.profile != undefined && allcomplete.experience != undefined && allcomplete.availability != undefined && allcomplete.legal != undefined)
 			{
-				$("#legal_form").remove();
+				angular.element( document.querySelector("#legal_form") ).remove();
 				$("#progressbar li").eq(4).addClass("active");
 				$location.path('/home');allcompletecookie.basicinfo=true;
 				allcompletecookie.experience=true;
