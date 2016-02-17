@@ -27,14 +27,14 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 		{
 			if(allcomplete.basic != undefined)
 			{
-				$("#basicinfo_form").delete();
+				$("#basicinfo_form").remove();
 				allcompletecookie.basicinfo=true;
 				Session.save('completeforms',allcompletecookie);
 				$("#progressbar li").eq(0).addClass("active");
 			}
 			if(allcomplete.profile != undefined)
 			{
-				$("#profile_form").delete();
+				$("#profile_form").remove();
 				allcompletecookie.basicinfo=true;
 				allcompletecookie.profile=true;
 				Session.save('completeforms',allcompletecookie);
@@ -42,7 +42,7 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 			}
 			if(allcomplete.experience != undefined)
 			{
-				$("#basicinfo_form").delete();
+				$("#basicinfo_form").remove();
 				allcompletecookie.basicinfo=true;
 				allcompletecookie.profile=true;
 				allcompletecookie.experience=true;
@@ -51,7 +51,7 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 			}
 			if(allcomplete.availability != undefined)
 			{
-				$("#availability_form").delete();
+				$("#availability_form").remove();
 				allcompletecookie.basicinfo=true;
 				allcompletecookie.experience=true;
 				allcompletecookie.availability=true;
@@ -61,7 +61,7 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 			}
 			if(allcomplete.basic != undefined && allcomplete.profile != undefined && allcomplete.experience != undefined && allcomplete.availability != undefined && allcomplete.legal != undefined)
 			{
-				$("#legal_form").delete();
+				$("#legal_form").remove();
 				$("#progressbar li").eq(4).addClass("active");
 				$location.path('/home');allcompletecookie.basicinfo=true;
 				allcompletecookie.experience=true;
