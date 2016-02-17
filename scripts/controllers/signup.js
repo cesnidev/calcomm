@@ -14,7 +14,7 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 		var allcomplete = $scope.user.forms;
 		
 
-		console.log('contenido forms relation  : '+allcomplete);
+		console.log('contenido forms relation  : '+JSON.stringify(allcomplete));
 
 		if(Session.get('completeforms')==undefined)
 		{
@@ -27,42 +27,43 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 		{
 			if(allcomplete.basic != undefined)
 			{
+				$("#basicinfo_form").delete();
 				allcompletecookie.basicinfo=true;
 				Session.save('completeforms',allcompletecookie);
 				$("#progressbar li").eq(0).addClass("active");
 			}
 			if(allcomplete.profile != undefined)
 			{
+				$("#profile_form").delete();
 				allcompletecookie.basicinfo=true;
 				allcompletecookie.profile=true;
 				Session.save('completeforms',allcompletecookie);
-				$("#progressbar li").eq(0).addClass("active");
 				$("#progressbar li").eq(1).addClass("active");
 			}
 			if(allcomplete.experience != undefined)
 			{
+				$("#basicinfo_form").delete();
 				allcompletecookie.basicinfo=true;
 				allcompletecookie.profile=true;
 				allcompletecookie.experience=true;
 				Session.save('completeforms',allcompletecookie);
-				$("#progressbar li").eq(0).addClass("active");
-				$("#progressbar li").eq(1).addClass("active");
 				$("#progressbar li").eq(2).addClass("active");
 			}
 			if(allcomplete.availability != undefined)
 			{
+				$("#availability_form").delete();
 				allcompletecookie.basicinfo=true;
 				allcompletecookie.experience=true;
 				allcompletecookie.availability=true;
 				allcompletecookie.profile=true;
 				Session.save('completeforms',allcompletecookie);
-				$("#progressbar li").eq(0).addClass("active");
-				$("#progressbar li").eq(1).addClass("active");
-				$("#progressbar li").eq(2).addClass("active");
 				$("#progressbar li").eq(3).addClass("active");
 			}
 			if(allcomplete.basic != undefined && allcomplete.profile != undefined && allcomplete.experience != undefined && allcomplete.availability != undefined && allcomplete.legal != undefined)
-			{	$location.path('/home');allcompletecookie.basicinfo=true;
+			{
+				$("#legal_form").delete();
+				$("#progressbar li").eq(4).addClass("active");
+				$location.path('/home');allcompletecookie.basicinfo=true;
 				allcompletecookie.experience=true;
 				allcompletecookie.availability=true;
 				allcompletecookie.profile=true;
