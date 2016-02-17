@@ -1,7 +1,7 @@
 'use strict';
 
 eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cssInjector,$window,Session,$location,EventicaConfig,EventicaLogin) {
-	var allcompletecookie={};
+	var allcompletecookie={basicinfo:false,profile:false,experience:false,availability:false,legal:false};
 	if(!EventicaLogin.isAuthenticated())
 		$location.path("/login");
 	else
@@ -18,8 +18,7 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 
 		if(Session.get('completeforms')==undefined)
 		{
-			var c={basicinfo:false,profile:false,experience:false,availability:false,legal:false};
-			Session.save('completeforms',c);
+			Session.save('completeforms',allcompletecookie);
 		}
 		allcompletecookie = Session.get('completeforms');
 		
