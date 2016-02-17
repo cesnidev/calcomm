@@ -7,8 +7,8 @@
                 <div class="col l4  offset-l4 s10 offset-s1 m6" align="right">
                 	<ul class="collection" href='javascript:void(0);' data-activates='demoDropdown' dropdown data-hover="true">
 					    <li class="collection-item avatar">
-					      <img ng-show="!basicinfo.social" ng-src="{{croppedDataUrl}}" alt="" class="circle picture">
-					      <img ng-show="basicinfo.social" ng-src="{{ img }}"  alt="" class="circle picture">
+					      <img ng-show="!basicinfo.social" ng-src="{{croppedDataUrl}}" style="background-color:#FE7133;" alt="" class="circle picture">
+					      <img ng-show="basicinfo.social" ng-src="{{ img }}" style="background-color:#FE7133;" alt="" class="circle picture">
 					      <span class="title">{{ user.user}}</span>
 					      <p>{{ user.email }}
 					      </p>
@@ -40,7 +40,7 @@
 
 			<!-- fieldsets -->
 
-			<fieldset id="basicinfo_form" ng-if="user.forms.basic == undefined">
+			<fieldset id="basicinfo_form">
 				<md-content layout-padding class="inputErrors">
 			<form name="binfo" id="basicuser" ng-submit="submit()" novalidate ng-cloak>
 
@@ -196,6 +196,68 @@
 								</div>
 								<div class="col s12 l4"></div>
 				</div>
+				<!--
+				<div class="row ">
+							  <div class="col s12 l2">
+							     <label class="inline">Email: </label>
+    						  </div>
+    						  <div class="col s12 l6">
+
+    						  	<div class="input-field">
+									<label class="active" for="email">mail@domain.com</label>
+								   <input ng-minlength="5" required="" type="email" name="email" id="email" ng-model="basicinfo.email" ng-pattern="/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@(yahoo|hotmail|gmail)\.com*$/">
+							        <div class="eventicaerror" ng-messages="binfo.email.$error">
+								          <div ng-message="required">
+							            Email is required.
+							          </div>
+							          <div ng-message="pattern">
+							            Your email dont look like an e-mail address.
+							          </div>
+							        </div>
+							    </div>
+
+    						  </div><div class="col s12 l4"></div>
+				</div>
+				<div class="row">
+								<div class="col s12 l2">
+									<label class="inline"><font size="-1">Password:</font></label>
+								</div>
+								<div class="col s12 l6">
+									<div class="password-field">
+
+										<div class="input-field">
+											<label class="active" for="password">Password</label>
+										   <input required="" type="password" name="password" id="password" ng-model="basicinfo.password"  >
+									        <div class="eventicaerror" ng-messages="binfo.password.$error">
+										          <div ng-message="required">
+									            Passwords is required.
+									          </div>
+									        </div>
+									    </div>
+
+									  </div>
+								</div>
+								<div class="col s12 l4"></div>
+				</div>
+				<div class="row">
+								<div class="col s12 l6 offset-l2">
+									  <div class="password-field">
+									  <div class="input-field">
+											<label class="active" for="cpassword">Confirm password</label>
+										   <input required="" type="password" name="cpassword" id="cpassword"  ng-pattern="{{ basicinfo.password }}" ng-model="basicinfo.cpassword" >
+									        <div class="eventicaerror" ng-messages="binfo.cpassword.$error">
+										          <div ng-message="pattern">
+									            Passwords dont match.
+									          </div>
+									          <div ng-message="required">
+									            Confirm password is required.
+									          </div>
+									        </div>
+									    </div>
+									  </div>
+								</div>
+								<div class="col s12 l4"></div>
+				</div>-->
 				<div class="row">
 								<div class="col s12 l2">
 									<label class="inline"><font size="-1">Referred By:</font></label>
@@ -628,7 +690,7 @@
 			</md-content>
 			</fieldset>
 
-			<fieldset id="profile_form" ng-if="user.forms.profile == undefined">
+			<fieldset id="profile_form">
 			<md-content>
 			<form name="prof" id="profile" data-abide="ajax">
 				<h1>Profile</h1>
@@ -1213,7 +1275,7 @@
 			</md-content>
 			</fieldset>
 
-			<fieldset id="experience_form" ng-if="user.forms.experience == undefined">
+			<fieldset id="experience_form">
 			<md-content>
 			<form id="experience" name="exp" data-abide="ajax">
 				<h1>Experience</h1>
@@ -1889,7 +1951,7 @@
 			</md-content>
 			</fieldset>
 
-			<fieldset id="availability_form" ng-if="user.forms.availability == undefined">
+			<fieldset id="availability_form">
 			<md-content>
 			<form id="availability" name="avail" data-abide="ajax">
 				<h1>Availability</h1>
@@ -2130,7 +2192,7 @@
 			</md-content>
 			</fieldset>
 
-			<fieldset id="legal_form" ng-if="user.forms.legal == undefined">
+			<fieldset id="legal_form">
 			<md-content>
 			<form id="legal" name="legl" data-abide="ajax" novalidate>
 				<h1>Legal</h1>
