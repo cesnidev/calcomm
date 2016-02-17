@@ -16,15 +16,13 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 
 		console.log('contenido forms relation  : '+allcomplete);
 
-		if(Session.get()==undefined)
+		if(Session.get('completeforms')==undefined)
 		{
 			var c={basicinfo:false,profile:false,experience:false,availability:false,legal:false};
 			Session.save('completeforms',c);
 		}
-		else
-		{
-			allcompletecookie = Session.get('completeforms');
-		}
+		allcompletecookie = Session.get('completeforms');
+		
 
 		if(allcomplete !=undefined)
 		{
