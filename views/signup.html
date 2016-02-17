@@ -8,7 +8,7 @@
                 	<ul class="collection" href='javascript:void(0);' data-activates='demoDropdown' dropdown data-hover="true">
 					    <li class="collection-item avatar">
 					      <img ng-show="!basicinfo.social" ng-src="{{croppedDataUrl}}" style="background-color:#FE7133;" alt="" class="circle picture">
-					      <img ng-show="basicinfo.social" ng-src="{{ img }}" style="background-color:#FE7133;" alt="" class="circle picture">
+					      <img ng-show="basicinfo.social" ng-src="{{ img }}" alt="" class="circle picture">
 					      <span class="title">{{ user.user}}</span>
 					      <p>{{ user.email }}
 					      </p>
@@ -40,7 +40,7 @@
 
 			<!-- fieldsets -->
 
-			<fieldset id="basicinfo_form">
+			<fieldset id="basicinfo_form" ng-if="user.forms.basic == undefined">
 				<md-content layout-padding class="inputErrors">
 			<form name="binfo" id="basicuser" ng-submit="submit()" novalidate ng-cloak>
 
