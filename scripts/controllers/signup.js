@@ -25,7 +25,7 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 
 		if(allcomplete !=undefined)
 		{
-			if(allcomplete.basicinfo != undefined)
+			if(allcomplete.basic != undefined)
 			{
 				allcompletecookie.basicinfo=true;
 				Session.save('completeforms',allcompletecookie);

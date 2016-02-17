@@ -7,8 +7,8 @@
                 <div class="col l4  offset-l4 s10 offset-s1 m6" align="right">
                 	<ul class="collection" href='javascript:void(0);' data-activates='demoDropdown' dropdown data-hover="true">
 					    <li class="collection-item avatar">
-					      <img ng-show="!basicinfo.social" ng-src="{{croppedDataUrl}}" alt="" class="circle picture">
-					      <img ng-show="basicinfo.social" ng-src="{{ img }}" alt="" class="circle picture">
+					      <img ng-show="!basicinfo.social" ng-src="{{croppedDataUrl}}" style="background-color:#FE7133;" alt="" class="circle picture">
+					      <img ng-show="basicinfo.social" ng-src="{{ img }}" style="background-color:#FE7133;" alt="" class="circle picture">
 					      <span class="title">{{ user.user}}</span>
 					      <p>{{ user.email }}
 					      </p>
@@ -31,16 +31,16 @@
 <div id="eventicaforms" class="inputErrors" >
 
 			<ul id="progressbar">
-				<li id="basicinfo_progress" class="active">Basic Info</li>
-				<li id="profile_progress"  class="">Profile</li>
-				<li id="experience_progress" class="">Experience</li>
-				<li id="availability_progress" class="">Availability</li>
-				<li id="legal_progress" class="">Legal</li>
+				<li id="#basicinfo_form" class="active">Basic Info</li>
+				<li id="#profile_form"  class="">Profile</li>
+				<li id="#experience_form" class="">Experience</li>
+				<li id="#basicinfo_form" class="">Availability</li>
+				<li id="#basicinfo_form" class="">Legal</li>
 			</ul>
 
 			<!-- fieldsets -->
 
-			<fieldset id="basicinfo_form" ng-if="user.forms.basic == undefined">
+			<fieldset id="basicinfo_form">
 				<md-content layout-padding class="inputErrors">
 			<form name="binfo" id="basicuser" ng-submit="submit()" novalidate ng-cloak>
 
@@ -323,39 +323,9 @@
 											<div class="input-field">
 												<label class="active" for="state">State</label>
 									
-												<select ng-model="basicinfo.state" name="state" required>
-    									<option value="" disabled selected>--</option>
-                                    	<option value="4'10">4'10</option>
-                                    	<option value="4'11">4'11</option>
-                                    	<option value="4'12">4'12</option>
-                                    	<option value="5'0">5'0</option>
-                                    	<option value="5'1">5'1</option>
-                                    	<option value="5'2">5'2</option>
-                                    	<option value="5'3">5'3</option>
-                                    	<option value="5'4">5'4</option>
-                                    	<option value="5'5">5'5</option>
-                                    	<option value="5'6">5'6</option>
-                                    	<option value="5'7">5'7</option>
-                                    	<option value="5'8">5'8</option>
-                                    	<option value="5'9">5'9</option>
-                                    	<option value="5'10">5'10</option>
-                                    	<option value="5'11">5'11</option>
-                                    	<option value="5'12">5'12</option>
-                                    	<option value="6'0">6'0</option>
-                                    	<option value="6'1">6'1</option>
-                                    	<option value="6,2">6,2</option>
-                                    	<option value="6'3">6'3</option>
-                                    	<option value="6'4">6'4</option>
-                                    	<option value="6'5">6'5</option>
-                                    	<option value="6'6">6'6</option>
-                                    	<option value="6'7">6'7</option>
-                                    	<option value="6'8">6'8</option>
-                                    	<option value="6'9">6'9</option>
-                                    	<option value="6'10">6'10</option>
-                                    	<option value="6'11">6'11</option>
-                                    	<option value="6'12">6'12</option>
-    								  
-    								</select>
+												<select class="" ng-model="basicinfo.state" name="state" id="state" required material-select watch>
+												    <option ng-repeat="state in states">{{state}}</option>
+												</select>
 									        
 
 									        <div class="eventicaerror" ng-messages="binfo.state.$error">
@@ -720,7 +690,7 @@
 			</md-content>
 			</fieldset>
 
-			<fieldset id="profile_form" ng-if="user.forms.profile == undefined">
+			<fieldset id="profile_form">
 			<md-content>
 			<form name="prof" id="profile" data-abide="ajax">
 				<h1>Profile</h1>
@@ -1305,7 +1275,7 @@
 			</md-content>
 			</fieldset>
 
-			<fieldset id="experience_form" ng-if="user.forms.experience == undefined">
+			<fieldset id="experience_form">
 			<md-content>
 			<form id="experience" name="exp" data-abide="ajax">
 				<h1>Experience</h1>
@@ -1981,7 +1951,7 @@
 			</md-content>
 			</fieldset>
 
-			<fieldset id="availability_form" ng-if="user.forms.availability == undefined">
+			<fieldset id="availability_form">
 			<md-content>
 			<form id="availability" name="avail" data-abide="ajax">
 				<h1>Availability</h1>
@@ -2222,7 +2192,7 @@
 			</md-content>
 			</fieldset>
 
-			<fieldset id="legal_form" ng-if="user.forms.legal == undefined">
+			<fieldset id="legal_form">
 			<md-content>
 			<form id="legal" name="legl" data-abide="ajax" novalidate>
 				<h1>Legal</h1>
