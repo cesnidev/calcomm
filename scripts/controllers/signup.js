@@ -29,15 +29,15 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 			{
 				allcompletecookie.basicinfo=true;
 				Session.save('completeforms',allcompletecookie);
-				$("#profile_progress").addClass("active");
+				$("#progressbar li").eq(0).addClass("active");
 			}
 			if(allcomplete.profile != undefined)
 			{
 				allcompletecookie.basicinfo=true;
 				allcompletecookie.profile=true;
 				Session.save('completeforms',allcompletecookie);
-				$("#profile_progress").addClass("active");
-				$("#experience_progress").addClass("active");
+				$("#progressbar li").eq(0).addClass("active");
+				$("#progressbar li").eq(1).addClass("active");
 			}
 			if(allcomplete.experience != undefined)
 			{
@@ -45,9 +45,9 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 				allcompletecookie.profile=true;
 				allcompletecookie.experience=true;
 				Session.save('completeforms',allcompletecookie);
-				$("#profile_progress").addClass("active");
-				$("#experience_progress").addClass("active");
-				$("#availability_progress").addClass("active");
+				$("#progressbar li").eq(0).addClass("active");
+				$("#progressbar li").eq(1).addClass("active");
+				$("#progressbar li").eq(2).addClass("active");
 			}
 			if(allcomplete.availability != undefined)
 			{
@@ -56,10 +56,10 @@ eventica.controller('SignUpCtrl', function($rootScope,$scope,EventicaResource,cs
 				allcompletecookie.availability=true;
 				allcompletecookie.profile=true;
 				Session.save('completeforms',allcompletecookie);
-				$("#profile_progress").addClass("active");
-				$("#experience_progress").addClass("active");
-				$("#availability_progress").addClass("active");
-				$("#legal_progress").addClass("active");
+				$("#progressbar li").eq(0).addClass("active");
+				$("#progressbar li").eq(1).addClass("active");
+				$("#progressbar li").eq(2).addClass("active");
+				$("#progressbar li").eq(3).addClass("active");
 			}
 			if(allcomplete.basic != undefined && allcomplete.profile != undefined && allcomplete.experience != undefined && allcomplete.availability != undefined && allcomplete.legal != undefined)
 			{	$location.path('/home');allcompletecookie.basicinfo=true;
