@@ -95,7 +95,7 @@ eventica.factory('EventicaResource', function($resource,EventicaConfig) {
       }
 
     }, function errorCallback(response) {
-      if(response!=undefined)
+      if(response!=undefined && response.data.errors!=undefined)
       {
         notificar(response.data.errors[0]);
       }
